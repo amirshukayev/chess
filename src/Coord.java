@@ -1,3 +1,5 @@
+import java.lang.IllegalArgumentException;
+
 public class Coord {
     public static int x;
     public static int y;
@@ -20,19 +22,31 @@ public class Coord {
         this.y = y;
     }
 
-    // converts algebraic notation to coordinates
-    // A1, a1, h5, etc...
-    
-    public void setCoords(String str){
-        char a = str.charAt(0);
+    public void setCoords(String str) throws IllegalArgumentException{
+        char c = str.charAt(0);
 
-        if (a < 73 && a > 64) {
-            this.x = a - 65;
-        }
-        else if (a < 105 && a > 96){
-            this.x = a - 97;
-        }
 
-        this.y = str.charAt(1) - 1;
+        // make sure input is 1 Letter (A-H or a=h) followed by 1 number(1-8
+        if (str.length() == 2 && ((c < 73 && c > 64) || (c < 105 && c > 96) ) &&  ('0' < str.charAt(1) && str.charAt(1) < '9')  ) {
+
+            if (c < 73 && c > 64) {
+
+                // char to int (0-7)
+                this.x = c - 'A';
+
+            } else if (c < 105 && c > 96) {
+
+                // char to int (0 - 7)
+                this.x = c - 'a';
+
+            }
+
+            this.y = str.charAt(1) - '1';
+
+        } else {
+
+            throw new IllegalArgumentException("setCoords() didn't get Letter-Number");
+
+        }
     }
 }
