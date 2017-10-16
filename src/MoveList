@@ -1,0 +1,25 @@
+import java.util.ArrayList;
+
+public class MoveList
+{
+
+    public static ArrayList<Move> moves = new ArrayList();
+
+    public MoveList(){
+
+    }
+
+    public void addMove (Coord start, Coord end){
+
+        Move m = new Move(start, end);
+        moves.add(m);
+
+    }
+
+    public void addMove (Move m) {
+
+        moves.add(m);
+
+    }
+
+}
