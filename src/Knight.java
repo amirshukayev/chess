@@ -41,7 +41,6 @@ public class Knight extends Piece {
     public MoveList getMoveList (Board b) {
 
         MoveList m = new MoveList();
-
         Coord c = new Coord(0,0);
 
         int testX = super.c.x;
@@ -49,9 +48,11 @@ public class Knight extends Piece {
         testX+=2;
         testY--;
         c.setCoords(testX, testY);
-        if (testY > -1 && testX < 8 && !b.isSameColourPiece(c, super.white)) {
+        if (testY > -1 && testX < 8) {
             System.out.println("Worked 1");
-            m.addMove(super.c, c);
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
         }
 
 
@@ -61,9 +62,11 @@ public class Knight extends Piece {
         testX+=2;
         testY++;
         c.setCoords(testX, testY);
-        if (testY > -1 && testX < 8 && !b.isSameColourPiece(c, super.white)) {
+        if (testY < 8 && testX < 8) {
             System.out.println("Worked 2");
-            m.addMove(super.c, c);
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
         }
 
 
@@ -72,8 +75,25 @@ public class Knight extends Piece {
         testX--;
         testY+=2;
         c.setCoords(testX, testY);
-        if (testY > -1 && testX < 8 && !b.isSameColourPiece(c, super.white)) {
-            m.addMove(super.c, c);
+        if (testY < 8 && testX > -1) {
+            System.out.println("Worked 3");
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
+        }
+
+
+
+        testX = super.c.x;
+        testY = super.c.y;
+        testX--;
+        testY-=2;
+        c.setCoords(testX, testY);
+        if (testY > -1 && testX > -1) {
+            System.out.println("Worked 4");
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
         }
 
 
@@ -82,9 +102,49 @@ public class Knight extends Piece {
         testX++;
         testY+=2;
         c.setCoords(testX, testY);
-        if (testY > -1 && testX < 8 && !b.isSameColourPiece(c, super.white)) {
-            m.addMove(super.c, c);
+        if (testY < 8 && testX < 8) {
+            System.out.println("Worked 5");
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
         }
+
+        testX = super.c.x;
+        testY = super.c.y;
+        testX++;
+        testY-=2;
+        c.setCoords(testX, testY);
+        if (testY > -1 && testX < 8) {
+            System.out.println("Worked 6");
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
+        }
+
+        testX = super.c.x;
+        testY = super.c.y;
+        testX-=2;
+        testY++;
+        c.setCoords(testX, testY);
+        if (testY < 8 && testX > -1) {
+            System.out.println("Worked 7");
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
+        }
+
+        testX = super.c.x;
+        testY = super.c.y;
+        testX-=2;
+        testY--;
+        c.setCoords(testX, testY);
+        if (testY > -1 && testX > -1) {
+            System.out.println("Worked 8");
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
+        }
+
 
         return m;
 
