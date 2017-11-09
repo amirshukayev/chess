@@ -15,8 +15,6 @@ public class Main {
 
         m.printMoves();
 
-        System.out.println("TODO: MAKE IT SO U CAN'T GO THROUGH BLACK PIECES FOR ROOK");
-
     }
 
 }
