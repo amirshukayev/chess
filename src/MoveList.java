@@ -31,7 +31,7 @@ public class MoveList
 
     public void printMoves () {
 
-        System.out.println(moves.size());
+        System.out.println("Number of Legal Moves: " + moves.size());
 
         for (int i = 0; i < moves.size(); i++) {
 
@@ -44,6 +44,24 @@ public class MoveList
             System.out.print(m.end.x);
             System.out.print(",");
             System.out.println(m.end.y);
+
+        }
+
+    }
+
+    public void printMovesAN () {
+
+        System.out.println("Number of Legal Moves: " + moves.size());
+
+        for (int i = 0; i < moves.size(); i++) {
+
+            Move m = moves.get(i);
+
+            System.out.print((char)(m.start.x + 'a'));
+            System.out.print(m.start.y + 1);
+            System.out.print(" to ");
+            System.out.print((char)(m.end.x + 'a'));
+            System.out.println(m.end.y + 1);
 
         }
 
