@@ -36,6 +36,12 @@ public class Board extends Game {
 
     }
 
+    public Piece getPiece(int x, int y){
+
+        return board[x][y];
+
+    }
+
     public void resetBoard(){
 
         board[0][0] = new Rook(0,0,true);
@@ -101,6 +107,35 @@ public class Board extends Game {
             return (board[c.x][c.y].isWhite() == white);
 
         }
+
+    }
+
+
+    public boolean isEmpty (Coord c) {
+
+        if (board[c.x][c.y].letter == ' ') {
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+
+    }
+
+    public boolean isEmpty (String s) {
+
+        Coord c = new Coord(s);
+        return isEmpty(c);
+
+    }
+
+    public boolean isEmpty (int x, int y) {
+
+        Coord c = new Coord(x, y);
+        return isEmpty(c);
 
     }
 
