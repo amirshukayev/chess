@@ -1,5 +1,8 @@
 public class Pawn extends Piece {
 
+    public boolean firstMove;
+    public boolean enPassant;
+
     public Pawn (Coord c, boolean white) {
 
         super.c = c;
@@ -14,6 +17,9 @@ public class Pawn extends Piece {
             super.letter = 'p';
 
         }
+
+        this.firstMove = true;
+        this.enPassant = false;
 
     }
 
@@ -35,6 +41,32 @@ public class Pawn extends Piece {
 
         }
 
+        this.firstMove = true;
+        this.enPassant = false;
+
+    }
+
+
+    public Pawn (String s, boolean white) {
+
+        Coord c = new Coord(s);
+
+        super.white = white;
+        super.c = c;
+
+        if (white) {
+
+            super.letter = 'P';
+
+        } else {
+
+            super.letter = 'p';
+
+        }
+
+        this.firstMove = true;
+        this.enPassant = false;
+
     }
 
     @Override
@@ -44,6 +76,43 @@ public class Pawn extends Piece {
 
         int testX = super.c.x;
         int testY = super.c.y;
+
+        if (testY != 7) {
+            testY++;
+            if (b.getPiece(testX, testY).letter == ' ') {
+                Coord c = new Coord(testX, testY);
+                m.addMove(super.c, c);
+            }
+        }
+
+        // moving two up
+        if (this.c.y == 1) {
+            testY++;
+            if (b.getPiece(testX, testY).letter == ' ' && b.getPiece(testX, testY - 1).letter == ' ') {
+                Coord c = new Coord(testX, testY);
+                m.addMove(super.c, c);
+            }
+        }
+
+        // testing for diagonal eating
+        if (testX != 0) {
+            testY--;
+            testX--;
+
+            if (!b.isSameColourPiece(testX, testY, this.white) && b.getPiece(testX, testY).letter != ' ') {
+                Coord c = new Coord(testX, testY);
+                m.addMove(super.c, c);
+            }
+        }
+
+        testX++;
+        if (testX != 7) {
+            testX++;
+            if (!b.isSameColourPiece(testX, testY, this.white) && b.getPiece(testX, testY).letter != ' ') {
+                Coord c = new Coord(testX, testY);
+                m.addMove(super.c, c);
+            }
+        }
 
         return m;
 
