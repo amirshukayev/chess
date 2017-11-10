@@ -70,14 +70,15 @@ public class Rook extends Piece {
 
             Coord c = new Coord(testX, testY);
 
-            if ( b.isSameColourPiece(c, super.white) ) {
-
-                break;
-
-            } else {
+            if (!b.isSameColourPiece(c, super.white) ) {
 
                 moves.addMove(super.c, c);
+                if (b.getPiece(c).letter != ' ') {
+                    break;
+                }
 
+            } else {
+                break;
             }
 
             testX--;
@@ -91,14 +92,15 @@ public class Rook extends Piece {
 
             Coord c = new Coord(testX, testY);
 
-            if ( b.isSameColourPiece(c, super.white) ) {
-
-                break;
-
-            } else {
+            if (!b.isSameColourPiece(c, super.white) ) {
 
                 moves.addMove(super.c, c);
+                if (b.getPiece(c).letter != ' ') {
+                    break;
+                }
 
+            } else {
+                break;
             }
 
             testX++;
@@ -112,14 +114,15 @@ public class Rook extends Piece {
 
             Coord c = new Coord(testX, testY);
 
-            if ( b.isSameColourPiece(c, super.white) ) {
-
-                break;
-
-            } else {
+            if (!b.isSameColourPiece(c, super.white) ) {
 
                 moves.addMove(super.c, c);
+                if (b.getPiece(c).letter != ' ') {
+                    break;
+                }
 
+            } else {
+                break;
             }
 
             testY--;
@@ -133,16 +136,15 @@ public class Rook extends Piece {
 
             Coord c = new Coord(testX, testY);
 
-            if ( b.isSameColourPiece(c, super.white) ) {
-
-                break;
-
-            } else {
-
-                Piece p = b.getPiece(c);
+            if (!b.isSameColourPiece(c, super.white) ) {
 
                 moves.addMove(super.c, c);
+                if (b.getPiece(c).letter != ' ') {
+                    break;
+                }
 
+            } else {
+                break;
             }
 
             testY++;
