@@ -71,6 +71,8 @@ public class Bishop extends Piece {
                 if (b.getPiece(c).letter != ' '){
                     break;
                 }
+            } else {
+                break;
             }
             testX++;
             testY++;
@@ -88,6 +90,8 @@ public class Bishop extends Piece {
                 if (b.getPiece(c).letter != ' '){
                     break;
                 }
+            } else {
+                break;
             }
             testX++;
             testY--;
@@ -106,6 +110,8 @@ public class Bishop extends Piece {
                 if (b.getPiece(c).letter != ' '){
                     break;
                 }
+            } else {
+                break;
             }
             testX--;
             testY++;
@@ -123,6 +129,8 @@ public class Bishop extends Piece {
                 if (b.getPiece(c).letter != ' '){
                     break;
                 }
+            } else {
+                break;
             }
             testX--;
             testY--;
