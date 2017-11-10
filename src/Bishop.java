@@ -17,6 +17,25 @@ public class Bishop extends Piece {
 
     }
 
+    public Bishop (String s, boolean white) {
+
+        Coord c = new Coord(s);
+
+        super.white = white;
+        super.c = c;
+
+        if (white) {
+
+            super.letter = 'B';
+
+        } else {
+
+            super.letter = 'b';
+
+        }
+
+    }
+
     public Bishop (int x, int y, boolean white) {
 
         super.white = white;
@@ -43,6 +62,72 @@ public class Bishop extends Piece {
 
         int testX = super.c.x;
         int testY = super.c.y;
+        testX++;
+        testY++;
+        while (testX < 8 && testY < 8 && testX > -1 && testY > -1) {
+            Coord c = new Coord(testX, testY);
+            if (!b.isSameColourPiece(c, super.white)){
+                m.addMove(super.c, c);
+                if (b.getPiece(c).letter != ' '){
+                    break;
+                }
+            }
+            testX++;
+            testY++;
+        }
+
+
+        testX = super.c.x;
+        testY = super.c.y;
+        testX++;
+        testY--;
+        while (testX < 8 && testY < 8 && testX > -1 && testY > -1) {
+            Coord c = new Coord(testX, testY);
+            if (!b.isSameColourPiece(c, super.white)){
+                m.addMove(super.c, c);
+                if (b.getPiece(c).letter != ' '){
+                    break;
+                }
+            }
+            testX++;
+            testY--;
+        }
+
+
+
+        testX = super.c.x;
+        testY = super.c.y;
+        testX--;
+        testY++;
+        while (testX < 8 && testY < 8 && testX > -1 && testY > -1) {
+            Coord c = new Coord(testX, testY);
+            if (!b.isSameColourPiece(c, super.white)){
+                m.addMove(super.c, c);
+                if (b.getPiece(c).letter != ' '){
+                    break;
+                }
+            }
+            testX--;
+            testY++;
+        }
+
+
+        testX = super.c.x;
+        testY = super.c.y;
+        testX--;
+        testY--;
+        while (testX < 8 && testY < 8 && testX > -1 && testY > -1) {
+            Coord c = new Coord(testX, testY);
+            if (!b.isSameColourPiece(c, super.white)){
+                m.addMove(super.c, c);
+                if (b.getPiece(c).letter != ' '){
+                    break;
+                }
+            }
+            testX--;
+            testY--;
+        }
+
 
         return m;
 
