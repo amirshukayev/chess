@@ -1,7 +1,7 @@
 public class Move {
 
-    public static Coord start;
-    public static Coord end;
+    public Coord start;
+    public Coord end;
 
     public Move (Coord start, Coord end) {
 
