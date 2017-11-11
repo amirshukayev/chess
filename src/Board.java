@@ -3,17 +3,24 @@ import java.util.ArrayList;
 public class Board extends Game {
 
     public Piece[][] board = new Piece[8][8];
+    public boolean whiteTurn;
 
-    ArrayList<Piece> pieces = new ArrayList();
+    private ArrayList<Piece> whitePieces = new ArrayList();
+    private ArrayList<Piece> blackPieces = new ArrayList();
 
     public Board () {
-
+        resetBoard();
     }
 
     public void addPiece (Piece p){
 
         board[p.c.x][p.c.y] = p;
-        pieces.add(p);
+
+        if (p.white) {
+            whitePieces.add(p);
+        } else {
+            blackPieces.add(p);
+        }
 
     }
 
@@ -109,6 +116,8 @@ public class Board extends Game {
 
     public void resetBoard(){
 
+        this.whiteTurn = true;
+
         board[0][0] = new Rook(0,0,true);
         board[1][0] = new Knight(1, 0, true);
         board[2][0] = new Bishop(2, 0, true);
@@ -141,7 +150,7 @@ public class Board extends Game {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (!this.isEmpty(i, j)) {
-                    pieces.add(board[i][j]);
+                    this.addPiece(board[i][j]);
                 }
             }
         }
@@ -230,9 +239,17 @@ public class Board extends Game {
 
         MoveList m = new MoveList();
 
-        for (int i = 0; i < this.pieces.size(); i++) {
-            Piece p = this.pieces.get(i);
-            m.addAll(p.getMoveList(this));
+        if (this.whiteTurn) {
+            for (int i = 0; i < this.whitePieces.size(); i++) {
+                Piece p = this.whitePieces.get(i);
+                m.addAll(p.getMoveList(this));
+            }
+        }
+        else {
+            for (int i = 0; i < this.blackPieces.size(); i++) {
+                Piece p = this.blackPieces.get(i);
+                m.addAll(p.getMoveList(this));
+            }
         }
 
         return m;
