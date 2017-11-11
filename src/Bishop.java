@@ -68,7 +68,7 @@ public class Bishop extends Piece {
             Coord c = new Coord(testX, testY);
             if (!b.isSameColourPiece(c, super.white)){
                 m.addMove(super.c, c);
-                if (b.getPiece(c).letter != ' '){
+                if (!b.isEmpty(c)){
                     break;
                 }
             } else {
@@ -87,7 +87,7 @@ public class Bishop extends Piece {
             Coord c = new Coord(testX, testY);
             if (!b.isSameColourPiece(c, super.white)){
                 m.addMove(super.c, c);
-                if (b.getPiece(c).letter != ' '){
+                if (!b.isEmpty(c)){
                     break;
                 }
             } else {
@@ -107,7 +107,7 @@ public class Bishop extends Piece {
             Coord c = new Coord(testX, testY);
             if (!b.isSameColourPiece(c, super.white)){
                 m.addMove(super.c, c);
-                if (b.getPiece(c).letter != ' '){
+                if (!b.isEmpty(c)){
                     break;
                 }
             } else {
@@ -126,7 +126,7 @@ public class Bishop extends Piece {
             Coord c = new Coord(testX, testY);
             if (!b.isSameColourPiece(c, super.white)){
                 m.addMove(super.c, c);
-                if (b.getPiece(c).letter != ' '){
+                if (!b.isEmpty(c)){
                     break;
                 }
             } else {
