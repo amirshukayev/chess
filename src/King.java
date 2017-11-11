@@ -67,7 +67,9 @@ public class King extends Piece {
         if (testX != 0) {
             testX--;
             Coord c = new Coord(testX, testY);
-            m.addMove(super.c, c);
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
         }
 
         testX = super.c.x;
@@ -77,7 +79,9 @@ public class King extends Piece {
             testX--;
             testY--;
             Coord c = new Coord(testX, testY);
-            m.addMove(super.c, c);
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
         }
 
         testX = super.c.x;
@@ -87,7 +91,9 @@ public class King extends Piece {
             testX--;
             testY++;
             Coord c = new Coord(testX, testY);
-            m.addMove(super.c, c);
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
         }
 
         testX = super.c.x;
@@ -96,7 +102,9 @@ public class King extends Piece {
         if (testY != 7) {
             testY++;
             Coord c = new Coord(testX, testY);
-            m.addMove(super.c, c);
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
         }
 
         testX = super.c.x;
@@ -106,7 +114,9 @@ public class King extends Piece {
             testX++;
             testY++;
             Coord c = new Coord(testX, testY);
-            m.addMove(super.c, c);
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
         }
 
         testX = super.c.x;
@@ -115,7 +125,9 @@ public class King extends Piece {
         if (testX != 7) {
             testX++;
             Coord c = new Coord(testX, testY);
-            m.addMove(super.c, c);
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
         }
 
         testX = super.c.x;
@@ -125,7 +137,9 @@ public class King extends Piece {
             testX++;
             testY--;
             Coord c = new Coord(testX, testY);
-            m.addMove(super.c, c);
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
         }
 
         testX = super.c.x;
@@ -134,7 +148,9 @@ public class King extends Piece {
         if (testY != 0) {
             testY--;
             Coord c = new Coord(testX, testY);
-            m.addMove(super.c, c);
+            if (!b.isSameColourPiece(c, super.white)) {
+                m.addMove(super.c, c);
+            }
         }
 
         return m;
