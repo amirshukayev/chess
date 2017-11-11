@@ -73,7 +73,7 @@ public class Rook extends Piece {
             if (!b.isSameColourPiece(c, super.white) ) {
 
                 moves.addMove(super.c, c);
-                if (b.getPiece(c).letter != ' ') {
+                if (!b.isEmpty(c)) {
                     break;
                 }
 
@@ -95,7 +95,7 @@ public class Rook extends Piece {
             if (!b.isSameColourPiece(c, super.white) ) {
 
                 moves.addMove(super.c, c);
-                if (b.getPiece(c).letter != ' ') {
+                if (!b.isEmpty(c)) {
                     break;
                 }
 
@@ -117,7 +117,7 @@ public class Rook extends Piece {
             if (!b.isSameColourPiece(c, super.white) ) {
 
                 moves.addMove(super.c, c);
-                if (b.getPiece(c).letter != ' ') {
+                if (!b.isEmpty(c)) {
                     break;
                 }
 
@@ -139,7 +139,7 @@ public class Rook extends Piece {
             if (!b.isSameColourPiece(c, super.white) ) {
 
                 moves.addMove(super.c, c);
-                if (b.getPiece(c).letter != ' ') {
+                if (!b.isEmpty(c)) {
                     break;
                 }
 
