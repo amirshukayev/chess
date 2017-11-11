@@ -29,6 +29,12 @@ public class MoveList
 
     }
 
+    public void addAll (MoveList m) {
+
+        moves.addAll(m.moves);
+
+    }
+
     public void printMoves () {
 
         System.out.println("Number of Legal Moves: " + moves.size());
