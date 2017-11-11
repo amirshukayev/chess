@@ -5,6 +5,9 @@ public class Board extends Game {
     public Piece[][] board = new Piece[8][8];
     public boolean whiteTurn;
 
+    private Coord whiteKing;
+    private Coord blackKing;
+
     private ArrayList<Piece> whitePieces = new ArrayList();
     private ArrayList<Piece> blackPieces = new ArrayList();
 
@@ -89,9 +92,29 @@ public class Board extends Game {
 
         Piece p  = board[start.x][start.y];
 
-        board[start.x][start.y] = null;
+        board[start.x][start.y] = new Empty(start.x, start.y);
         board[end.x][end.y] = p;
 
+    }
+
+    private Board moveBoard (Coord start, Coord end) {
+        Board b = this;
+
+        Piece p  = b.board[start.x][start.y];
+
+        b.board[start.x][start.y] = new Empty(start.x, start.y);
+        b.board[end.x][end.y] = p;
+
+
+        //flips the turn
+        b.whiteTurn = !this.whiteTurn;
+
+        return b;
+    }
+
+    private Board moveBoard (Move m) {
+        Board b = moveBoard(m.start, m.end);
+        return b;
     }
 
     public Piece getPiece(String s) {
@@ -140,6 +163,9 @@ public class Board extends Game {
         board[5][7] = new Bishop(5, 7, false);
         board[6][7] = new Knight(6, 7, false);
         board[7][7] = new Rook(7, 7, false);
+
+        whiteKing = new Coord(4, 0);
+        blackKing = new Coord(4, 7);
 
         for (int i = 0; i < 8; i++) {
             for (int j = 2; j < 6; j++) {
@@ -235,9 +261,17 @@ public class Board extends Game {
 
     }
 
-    public MoveList allLegalMoves () {
+    public MoveList allLegalMoves (){
+        MoveList m = allLegalishMoves();
+        m = trimChecks(m);
+        return m;
+    }
+
+    public MoveList allLegalishMoves () {
 
         MoveList m = new MoveList();
+
+        // if oppositeTurn is passed it gets other sides moves
 
         if (this.whiteTurn) {
             for (int i = 0; i < this.whitePieces.size(); i++) {
@@ -251,9 +285,47 @@ public class Board extends Game {
                 m.addAll(p.getMoveList(this));
             }
         }
+        return m;
+    }
+
+    public MoveList trimChecks(MoveList m) {
+
+        // go through each move in the list, see if opposite colour has any moves hitting this king
+        for (int i = 0; i < m.moves.size(); i++) {
+
+            MoveList tempM;
+            Move move = m.getMove(i);
+
+            // now Board is the board after the move has been made, whether legal or not
+            Board board = this.moveBoard(move);
+
+            // gets all legal moves for opposite colour now.
+            tempM = board.allLegalishMoves();
+
+            // checks all of those moves to see if one of them hits the king
+            if (this.whiteTurn) {
+                for (int j = 0; j < tempM.moves.size(); j++) {
+                    Move tempMove = tempM.getMove(j);
+                    if (tempMove.end == whiteKing) {
+
+                        // break because any move that hits king means that move shouldn't be legal
+                        m.removeMove(i);
+                        break;
+                    }
+                }
+            } else {
+                for (int j = 0; j < tempM.moves.size(); j++) {
+                    Move tempMove = tempM.getMove(j);
+                    if (tempMove.end == blackKing) {
+
+                        m.removeMove(i);
+                        break;
+                    }
+                }
+            }
+        }
 
         return m;
-
     }
 
 }
