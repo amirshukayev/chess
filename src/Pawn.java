@@ -74,45 +74,91 @@ public class Pawn extends Piece {
 
         MoveList m = new MoveList();
 
-        int testX = super.c.x;
-        int testY = super.c.y;
+        if (super.white) {
+            int testX = super.c.x;
+            int testY = super.c.y;
 
-        if (testY != 7) {
-            testY++;
-            if (b.getPiece(testX, testY).letter == ' ') {
-                Coord c = new Coord(testX, testY);
-                m.addMove(super.c, c);
+            if (testY != 7) {
+                testY++;
+                if (b.isEmpty(testX, testY)) {
+                    Coord c = new Coord(testX, testY);
+                    m.addMove(super.c, c);
+                }
             }
-        }
 
-        // moving two up
-        if (this.c.y == 1) {
-            testY++;
-            if (b.getPiece(testX, testY).letter == ' ' && b.getPiece(testX, testY - 1).letter == ' ') {
-                Coord c = new Coord(testX, testY);
-                m.addMove(super.c, c);
+            // moving two up
+            if (this.c.y == 1) {
+                testY++;
+                if (b.isEmpty(testX, testY) && b.isEmpty(testX, testY - 1)) {
+                    Coord c = new Coord(testX, testY);
+                    m.addMove(super.c, c);
+                }
             }
-        }
 
-        // testing for diagonal eating
-        if (testX != 0) {
-            testY--;
-            testX--;
+            // testing for diagonal eating
+            if (testX != 0) {
+                testY--;
+                testX--;
 
-            if (!b.isSameColourPiece(testX, testY, this.white) && b.getPiece(testX, testY).letter != ' ') {
-                Coord c = new Coord(testX, testY);
-                m.addMove(super.c, c);
+                if (!b.isSameColourPiece(testX, testY, this.white) && !b.isEmpty(testX, testY)) {
+                    Coord c = new Coord(testX, testY);
+                    m.addMove(super.c, c);
+                }
             }
-        }
 
-        testX++;
-        if (testX != 7) {
             testX++;
-            if (!b.isSameColourPiece(testX, testY, this.white) && b.getPiece(testX, testY).letter != ' ') {
-                Coord c = new Coord(testX, testY);
-                m.addMove(super.c, c);
+            if (testX != 7) {
+                testX++;
+                if (!b.isSameColourPiece(testX, testY, this.white) && !b.isEmpty(testX, testY)) {
+                    Coord c = new Coord(testX, testY);
+                    m.addMove(super.c, c);
+                }
             }
         }
+
+        else {
+            int testX = super.c.x;
+            int testY = super.c.y;
+
+            if (testY != 0) {
+                testY--;
+                if (b.isEmpty(testX, testY)) {
+                    Coord c = new Coord(testX, testY);
+                    m.addMove(super.c, c);
+                }
+            }
+
+            // moving two up
+            if (this.c.y == 6) {
+                testY--;
+                if (b.isEmpty(testX, testY) && b.isEmpty(testX, testY + 1)) {
+                    Coord c = new Coord(testX, testY);
+                    m.addMove(super.c, c);
+                }
+            }
+
+            // testing for diagonal eating
+            if (testX != 0) {
+                testY++;
+                testX--;
+
+                if (!b.isSameColourPiece(testX, testY, this.white) && !b.isEmpty(testX, testY)) {
+                    Coord c = new Coord(testX, testY);
+                    m.addMove(super.c, c);
+                }
+            }
+
+            testX++;
+            if (testX != 7) {
+                testX++;
+                if (!b.isSameColourPiece(testX, testY, this.white) && !b.isEmpty(testX, testY)) {
+                    Coord c = new Coord(testX, testY);
+                    m.addMove(super.c, c);
+                }
+            }
+        }
+
+
 
         return m;
 
