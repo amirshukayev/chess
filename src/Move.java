@@ -10,4 +10,14 @@ public class Move {
 
     }
 
+    public Move (String s1, String s2) {
+
+        Coord c1 = new Coord(s1);
+        Coord c2 = new Coord(s2);
+
+        this.start = c1;
+        this.end = c2;
+
+    }
+
 }
