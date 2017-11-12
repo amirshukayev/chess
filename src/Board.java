@@ -11,9 +11,114 @@ public class Board extends Game {
     private ArrayList<Piece> whitePieces = new ArrayList();
     private ArrayList<Piece> blackPieces = new ArrayList();
 
+    private int whiteMoves;
+    private int blackMoves;
+
     public Board () {
         resetBoard();
+
+
     }
+    
+    /* IPE --------- IMMEDIATE POSITION EVALUATOR
+
+       the IPE is a position evaluator that doesn't take into account future moves
+
+       MATERIAL:
+           Pawn: 1
+           Isolated Pawn: 0.8
+
+           Knight: 3
+           Bishop: 3 (with 2 of them)
+           Bishop: 2.8 (individual)
+           Rook: 5
+           Queen: 9
+
+           King: 40 (check mate)
+
+       POSSIBLE MOVES:
+
+             Each move: 0.05
+
+       TO ADD:
+
+          King being castled: 0.2 (need to add castling)
+          Passed pawns: every pawn past all enemy pawns is 1.5 (add promotion and en Passent)
+
+     */
+    public double IPE () {
+
+        this.whiteTurn = !this.whiteTurn;
+        if (this.whiteTurn) {
+            blackMoves = this.allLegalMoves().moves.size();
+        } else {
+            whiteMoves = this.allLegalMoves().moves.size();
+        }
+        this.whiteTurn = !this.whiteTurn;
+
+        double total = 0;
+
+        total += whiteMoves * 0.05;
+        total -= blackMoves * 0.05;
+
+        for (int i = 0; i < whitePieces.size(); i++) {
+            char c = whitePieces.get(i).letter;
+
+            if (c == 'Q'){
+                total += 9;
+            }
+            else if (c == 'R'){
+                total += 5;
+            }
+            else if (c == 'B'){
+                total += 3;
+            }
+            else if (c == 'N'){
+                total += 3;
+            }
+            else if (c == 'P'){
+                total += 1;
+            }
+            else if (c == 'K'){
+                total += 40;
+            }
+        }
+
+        for (int i = 0; i < blackPieces.size(); i++) {
+            char c = blackPieces.get(i).letter;
+
+            if (c == 'q'){
+                total -= 9;
+            }
+            else if (c == 'r'){
+                total -= 5;
+            }
+            else if (c == 'b'){
+                total -= 3;
+            }
+            else if (c == 'n'){
+                total -= 3;
+            }
+            else if (c == 'p'){
+                total -= 1;
+            }
+            else if (c == 'k'){
+                total -= 40;
+            }
+        }
+
+        return total;
+
+    }
+
+
+
+
+
+
+
+
+
 
     public void addPiece (Piece p){
 
@@ -283,6 +388,13 @@ public class Board extends Game {
     public MoveList allLegalMoves (){
         MoveList m = allLegalishMoves();
         m = trimChecks(m);
+
+        if (whiteTurn){
+            this.whiteMoves = m.moves.size();
+        } else {
+            this.blackMoves = m.moves.size();
+        }
+
         return m;
     }
 
