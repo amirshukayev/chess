@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Board extends Game {
+public class Board {
 
     public Piece[][] board = new Piece[8][8];
     public boolean whiteTurn;
@@ -100,32 +100,104 @@ public class Board extends Game {
             }
         }
 
+
         for (int i = 0; i < blackPieces.size(); i++) {
             char c = blackPieces.get(i).letter;
 
             if (c == 'q'){
-                total -= QUEEN;
+                total -= 9;
             }
             else if (c == 'r'){
-                total -= ROOK;
+                total -= 5;
             }
             else if (c == 'b'){
-                total -= KNIGHT;
+                total -= 3;
             }
             else if (c == 'n'){
-                total -= BISHOP;
+                total -= 3;
             }
             else if (c == 'p'){
-                total -= PAWN;
+                total -= 1;
             }
             else if (c == 'k'){
-                total -= KING;
+                total -= 40;
             }
         }
 
         return total;
 
     }
+
+
+
+
+    /* TPE - TRUE POSITION EVALUATOR
+
+       The TPE takes future moves into account. It makes ever possible move, evaluates them with IPE, and then
+       takes every other move and evaluates
+
+    */
+
+    // goes 1 layer deep
+    /*
+    public Move TPE () {
+
+        Move bestMove;
+        double bestEval3 = -1000;
+        double bestEval2 = 1000;
+        double bestEval1 = -1000;
+
+        Move bestMove3;
+        Move bestMove2;
+        Move bestMove1;
+
+        MoveList m = this.allLegalMoves();
+
+        for (int i = 0; i < m.moves.size(); i++) {
+
+            // make the move
+            Board b = this.moveBoard(m.getMove(i));
+
+            // evaluate the moved board
+            double evaluation = b.IPE();
+
+            MoveList m2 = b.allLegalMoves();
+
+            for (int j = 0; j < m2.moves.size(); j++) {
+
+                Board b2 = b.moveBoard(m2.getMove(j));
+                MoveList m3 = b2.allLegalMoves();
+
+                double evaluation2 = b2.IPE();
+
+                int bestIndex = 0;
+
+                if (evaluation2 < bestEval2) {
+                    bestEval2 = evaluation2;
+                    bestIndex = j;
+                }
+
+                for (int k = 0; k < m3.moves.size(); k++) {
+
+                    Board b3 = b2.moveBoard(m3.getMove(k));
+
+                    double evaluation3 = b3.IPE();
+
+                    if (evaluation3 > bestEval3) {
+                        bestEval3 = evaluation3;
+                        bestMove3 = m3.getMove(k);
+                    }
+
+                }
+
+            }
+
+        }
+
+        return bestMove;
+
+    }
+    */
 
 
     public void addPiece (Piece p){
@@ -310,6 +382,16 @@ public class Board extends Game {
                 if (!this.isEmpty(i, j)) {
                     this.addPiece(board[i][j]);
                 }
+            }
+        }
+
+    }
+
+    public void emptyBoard () {
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                this.board[i][j] = new Empty(i, j);
             }
         }
 
