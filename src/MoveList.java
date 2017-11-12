@@ -35,6 +35,12 @@ public class MoveList
 
     }
 
+    public void removeMove (int i) {
+
+        moves.remove(i);
+
+    }
+
     public void printMoves () {
 
         System.out.println("Number of Legal Moves: " + moves.size());
