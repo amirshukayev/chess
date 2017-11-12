@@ -19,7 +19,7 @@ public class Board extends Game {
 
 
     }
-    
+
     /* IPE --------- IMMEDIATE POSITION EVALUATOR
 
        the IPE is a position evaluator that doesn't take into account future moves
@@ -43,10 +43,16 @@ public class Board extends Game {
        TO ADD:
 
           King being castled: 0.2 (need to add castling)
-          Passed pawns: every pawn past all enemy pawns is 1.5 (add promotion and en Passent)
+          Passed pawns: every pawn past all enemy pawns is 1.5 (add promotion and en Passant)
 
      */
     public double IPE () {
+
+        if (whiteTurn){
+            whiteMoves = this.allLegalMoves().moves.size();
+        } else {
+            blackMoves = this.allLegalMoves().moves.size();
+        }
 
         this.whiteTurn = !this.whiteTurn;
         if (this.whiteTurn) {
@@ -55,6 +61,7 @@ public class Board extends Game {
             whiteMoves = this.allLegalMoves().moves.size();
         }
         this.whiteTurn = !this.whiteTurn;
+
 
         double total = 0;
 
