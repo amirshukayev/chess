@@ -104,22 +104,22 @@ public class Board extends Game {
             char c = blackPieces.get(i).letter;
 
             if (c == 'q'){
-                total -= 9;
+                total -= QUEEN;
             }
             else if (c == 'r'){
-                total -= 5;
+                total -= ROOK;
             }
             else if (c == 'b'){
-                total -= 3;
+                total -= KNIGHT;
             }
             else if (c == 'n'){
-                total -= 3;
+                total -= BISHOP;
             }
             else if (c == 'p'){
-                total -= 1;
+                total -= PAWN;
             }
             else if (c == 'k'){
-                total -= 40;
+                total -= KING;
             }
         }
 
