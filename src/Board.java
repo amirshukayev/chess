@@ -19,6 +19,12 @@ public class Board extends Game {
 
         board[p.c.x][p.c.y] = p;
 
+        if (p.letter == 'K'){
+            whiteKing = p.c;
+        } else if (p.letter == 'k') {
+            blackKing = p.c;
+        }
+
         if (p.white) {
             whitePieces.add(p);
         } else {
@@ -92,15 +98,27 @@ public class Board extends Game {
 
         Piece p  = board[start.x][start.y];
 
+        if (p.letter == 'K'){
+            whiteKing = end;
+        } else if (p.letter == 'k') {
+            blackKing = end;
+        }
+
         board[start.x][start.y] = new Empty(start.x, start.y);
         board[end.x][end.y] = p;
 
     }
 
-    private Board moveBoard (Coord start, Coord end) {
+    public Board moveBoard (Coord start, Coord end) {
         Board b = this;
 
         Piece p  = b.board[start.x][start.y];
+
+        if (p.letter == 'K'){
+            whiteKing = end;
+        } else if (p.letter == 'k') {
+            blackKing = end;
+        }
 
         b.board[start.x][start.y] = new Empty(start.x, start.y);
         b.board[end.x][end.y] = p;
@@ -112,7 +130,8 @@ public class Board extends Game {
         return b;
     }
 
-    private Board moveBoard (Move m) {
+
+    public Board moveBoard (Move m) {
         Board b = moveBoard(m.start, m.end);
         return b;
     }
@@ -306,7 +325,7 @@ public class Board extends Game {
             if (this.whiteTurn) {
                 for (int j = 0; j < tempM.moves.size(); j++) {
                     Move tempMove = tempM.getMove(j);
-                    if (tempMove.end == whiteKing) {
+                    if (tempMove.end.equals(whiteKing)) {
 
                         // break because any move that hits king means that move shouldn't be legal
                         m.removeMove(i);
@@ -316,7 +335,7 @@ public class Board extends Game {
             } else {
                 for (int j = 0; j < tempM.moves.size(); j++) {
                     Move tempMove = tempM.getMove(j);
-                    if (tempMove.end == blackKing) {
+                    if (tempMove.end.equals(blackKing)) {
 
                         m.removeMove(i);
                         break;
