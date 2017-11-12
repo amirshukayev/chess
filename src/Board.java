@@ -48,6 +48,15 @@ public class Board extends Game {
      */
     public double IPE () {
 
+        final double PAWN = 1;
+        final double KNIGHT = 3;
+        final double BISHOP = 3;
+        final double ROOK = 5;
+        final double QUEEN = 9;
+        final double KING = 40;
+
+        final double MOVE = 0.05;
+
         if (whiteTurn){
             whiteMoves = this.allLegalMoves().moves.size();
         } else {
@@ -65,29 +74,29 @@ public class Board extends Game {
 
         double total = 0;
 
-        total += whiteMoves * 0.05;
-        total -= blackMoves * 0.05;
+        total += whiteMoves * MOVE;
+        total -= blackMoves * MOVE;
 
         for (int i = 0; i < whitePieces.size(); i++) {
             char c = whitePieces.get(i).letter;
 
             if (c == 'Q'){
-                total += 9;
+                total += QUEEN;
             }
             else if (c == 'R'){
-                total += 5;
+                total += ROOK;
             }
             else if (c == 'B'){
-                total += 3;
+                total += BISHOP;
             }
             else if (c == 'N'){
-                total += 3;
+                total += KNIGHT;
             }
             else if (c == 'P'){
-                total += 1;
+                total += PAWN;
             }
             else if (c == 'K'){
-                total += 40;
+                total += KING;
             }
         }
 
@@ -117,14 +126,6 @@ public class Board extends Game {
         return total;
 
     }
-
-
-
-
-
-
-
-
 
 
     public void addPiece (Piece p){
