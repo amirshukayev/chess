@@ -11,13 +11,14 @@ public class Board {
     private ArrayList<Piece> whitePieces = new ArrayList();
     private ArrayList<Piece> blackPieces = new ArrayList();
 
-    private int whiteMoves;
-    private int blackMoves;
+    int whiteMoves;
+    int blackMoves;
+
+    public boolean whiteCanCastle;
+    public boolean blackCanCastle;
 
     public Board () {
         resetBoard();
-
-
     }
 
     /* IPE --------- IMMEDIATE POSITION EVALUATOR
@@ -56,26 +57,39 @@ public class Board {
         final double KING = 40;
 
         final double MOVE = 0.05;
+        double total = 0;
 
         if (whiteTurn){
             whiteMoves = this.allLegalMoves().moves.size();
-        } else {
-            blackMoves = this.allLegalMoves().moves.size();
-        }
+            System.out.println("white moves: " + whiteMoves);
 
-        this.whiteTurn = !this.whiteTurn;
-        if (this.whiteTurn) {
+            total += whiteMoves * MOVE;
+
+            this.whiteTurn = !whiteTurn;
+
             blackMoves = this.allLegalMoves().moves.size();
+            System.out.println("black moves: " + blackMoves);
+
+            this.whiteTurn = !whiteTurn;
+
+            total -= blackMoves * MOVE;
+
         } else {
+            blackMoves = this.allLegalMoves().moves.size();
+            System.out.println("black moves: " + blackMoves);
+
+            total -= blackMoves * MOVE;
+
+            this.whiteTurn = !whiteTurn;
+
             whiteMoves = this.allLegalMoves().moves.size();
+            System.out.println("white moves: " + whiteMoves);
+
+            total += whiteMoves * MOVE;
+
+            this.whiteTurn = !whiteTurn;
         }
-        this.whiteTurn = !this.whiteTurn;
 
-
-        double total = 0;
-
-        total += whiteMoves * MOVE;
-        total -= blackMoves * MOVE;
 
         for (int i = 0; i < whitePieces.size(); i++) {
             char c = whitePieces.get(i).letter;
